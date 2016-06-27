@@ -1,22 +1,21 @@
 'use strict';
 
 /* App Module */
-var statusQuotesApp = angular.module('statusQuotesApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngMaterial', 'statusQuotesControllers','statusQuotesServices', 'cacheService']); 
-
-statusQuotesApp.config(['$routeProvider', 
+angular.module('statusQuotesApp', ['ngRoute', 'ngSanitize', 'ngAnimate', 'ngMaterial', 'statusQuotesControllers','statusQuotesServices', 'cacheService'])
+.config(['$routeProvider', 
 		function ($routeProvider) {
 			$routeProvider.when('/home', {
 				templateUrl : 'partials/home.html',
 				controller : 'HomeCtrl' 
 			}).
+      when('/quotes/:cat', {
+        templateUrl : 'partials/quotes.html',
+        controller : 'QuotesCtrl'
+      }).
       /*
       when('/list', {
         templateUrl : 'partials/list.html',
         controller : 'QuoteListCtrl'
-      }).
-      when('/quotes/:cat', {
-        templateUrl : 'partials/quotes.html',
-        controller : 'QuotesCtrl'
       }).
       when('/quote/:cat/:index', {
         templateUrl : 'partials/quote.html',
@@ -31,13 +30,50 @@ statusQuotesApp.config(['$routeProvider',
 				redirectTo : '/home'
 			});
 		}
-	]);
-
-
-statusQuotesApp.config(function($mdThemingProvider) {
+	])
+.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default') 
     .primaryPalette('orange')
     .accentPalette('pink')
+})
+.run(function($rootScope, $location) {
+
+  //Share App
+    $rootScope.share = function () {   
+      window.analytics.trackEvent('Setting', 'App Share');    
+      window.plugins.socialsharing.share('Tamil Samayal kuripugal - A complete cooking guide free on Android', 'Tamil Samayal kuripugal', null, 'https://play.google.com/store/apps/details?id=com.career.wrap.tamil.samayal');
+    }
+
+    //Rate US
+    $rootScope.rateus = function () {        
+      window.analytics.trackEvent('Setting', 'Rate Us');    
+      var url = "market://details?id=com.career.wrap.tamil.samayal";
+      window.open(url,"_system");   
+    };  
+
+    //Feedback
+    $rootScope.feedback = function () {        
+      window.analytics.trackEvent('Setting', 'Feedback');    
+      //FIXME - Collect version from app 
+      window.plugin.email.open({
+       to:      ['tips2stayhealthy@gmail.com'],
+       subject: 'Feedback on Tamil Samyal Kuripugal',
+       body:    '',
+       isHtml:  true
+      });
+    };
+
+    //Recipies
+    $rootScope.recipie = function (piruvu) {        
+        var newpath = "/recipies/" + piruvu;
+      $location.path(newpath); 
+    };  
+
+    //Go Back
+    $rootScope.back = function () {        
+      window.history.back();
+    };  
+
 });
 
 

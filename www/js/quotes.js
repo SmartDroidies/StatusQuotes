@@ -1,5 +1,9 @@
+var C_URL = 'http://www.statusandquotes.careerwrap.com/?json=y';
+var C_CACHE_CATEGORY = "cache-sq-category";
+var C_KEY_SYNCTIME =  "sq_sync_time";
+var C_KEY_QUOTES =  "sq_quotes";
+var C_CACHE_QUOTES = "cache-quotes";
 
-var C_CACHE_CATEGORY = "cache-s-category";
 
 var testDevice = '9ff99ad5ec042ed6';
 var interDisplayed = false;
