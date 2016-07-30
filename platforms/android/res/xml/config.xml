@@ -13,6 +13,12 @@
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
     <allow-intent href="market:*" />
+    <icon density="ldpi" src="res/android/ldpi.png" />
+    <icon density="mdpi" src="res/android/mdpi.png" />
+    <icon density="hdpi" src="res/android/hdpi.png" />
+    <icon density="xhdpi" src="res/android/xhdpi.png" />
+    <icon density="xxhdpi" src="res/android/xxhdpi.png" />
+    <icon density="xxxhdpi" src="res/android/xxxhdpi.png" />
     <name>Status &amp; Quotes</name>
     <description>
         A Apache Cordova application for Status &amp; Quotes 
